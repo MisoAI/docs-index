@@ -1,0 +1,17 @@
+Explore module
+Table of Content
+Quick start
+Get started to build your own explore module in a few steps.
+Get your API key.Access the SDK.Build your explore UI module.
+Elements
+How to customize each custom element in explore UI.
+A list of elements that are used in explore UI.
+Workflow
+Introduce the workflow object that manages the life cycle of explore UI.
+Access the workflow object.Link function.
+Trending questions
+Retrieve trending questions.
+Retrieve trending questions
+Configuration
+Configure the explore module settings and behavior.
+Configure the number of questions to display

@@ -1,0 +1,85 @@
+Ask module (combo) - configuration
+You can configure the ask module with the some options, including:
+Features
+Phrases
+API payload
+Turn off auto-start
+The combo element automatically starts the routine when the SDK is loaded. Thus, to configure the module in time, we want to disable the auto-start feature by setting autostart to false in the script URL:
+<script async src="https://cdn.jsdelivr.net/npm/@miso.ai/client-sdk@latest/dist/umd/miso.min.js?api_key=...&autostart=false"></script>
+Access MisoClient
+MisoClient, the entry point of the SDK is available on window object. However, it won't be available until the SDK is loaded. The SDK provides a way to access MisoClient regardless of the loading status:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const MisoClient = window.MisoClient;
+// work with MisoClient
+});
+Access the configuation method
+Now you can access the configuration method:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const MisoClient = window.MisoClient;
+const combo = MisoClient.ui.combo.ask;
+// pass the configuration options
+combo.config({
+//...
+});
+// manually start the routine, since we have disabled the auto-start
+combo.start();
+});
+Features
+You can configure the features of the ask module:
+combo.config({
+features: {
+relatedResources: true,
+followUpQuestions: true,
+querySuggestions: true,
+},
+});
+The following table lists the available options:
+Key
+Description
+Default
+relatedResources
+Whether to show related resources section.
+true
+followUpQuestions
+Whether to enable follow-up questions.
+true
+querySuggestions
+Whether to show query suggestions for follow-up questions.
+true
+Phrases
+You can configure the phrases displayed in the ask module:
+combo.config({
+phrases: {
+question: 'You asked...',
+sources: 'My reply is based on the following',
+relatedQuestions: 'Related questions you can explore',
+relatedResources: 'Go beyond, and learn more about this topic',
+},
+});
+The following table lists the available options:
+Key
+Description
+Default
+question
+The phrases preceeding users' question.
+'You asked...'
+sources
+The title for citation sources section.
+'My reply is based on the following'
+relatedQuestions
+The title for related questions section.
+'Related questions you can explore'
+relatedResources
+The title for related resources section.
+'Go beyond, and learn more about this topic'
+API payload
+Since 1.9.2
+You can pass or overwrite parameters in the API payload:
+combo.config({
+api: {
+//...
+},
+});
+See API reference for the available options.

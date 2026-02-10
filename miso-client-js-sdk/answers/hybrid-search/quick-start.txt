@@ -1,0 +1,50 @@
+Hybrid search module - quick start
+Obtain your API key from Miso dashboard
+Add Miso SDK to your webpage
+Place Miso elements in your webpage
+Configure the workflows
+1. Obtain your API key
+Log in Miso dashboard.
+Select your enrivonment (e.g. Production).
+You can find your publishable API key in the Overview section.
+2. Add Miso SDK to your webpage
+As a node module
+In your project directory, run:
+npm install --save @miso.ai/client-sdk
+Then you can import MisoClient from the SDK:
+import MisoClient from '@miso.ai/client-sdk';
+// work with MisoClient
+Using a script tag
+Add the SDK script tag to your webpage:
+<head>  <script async src="https://cdn.jsdelivr.net/npm/@miso.ai/client-sdk@latest/dist/umd/miso.min.js"></script></head>
+You can put the script tag anywhere in the document.
+MisoClient is available on window object. However, it won't be available until the SDK is loaded. The SDK provides a way to access it regardless of the loading status:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const MisoClient = window.MisoClient;
+// work with MisoClient
+});
+3. Place an element in your webpage
+In your webpage, add the following elements where you want to display the hybrid search module:
+<body>
+<div id="miso-hybrid-search-combo" class="miso-hybrid-search-combo"></div>
+</body>
+4. Configure the workflows
+Configure the workflows as the following:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(async () => {
+// setup client
+const MisoClient = window.MisoClient;
+const client = new MisoClient('your_api_key');
+const workflow = client.ui.hybridSearch;
+// wait for styles to be loaded
+await client.ui.ready;
+// render DOM and get element references
+const defaults = MisoClient.ui.defaults.hybridSearch;
+const templates = defaults.templates;
+const rootElement = document.querySelector('#miso-hybrid-search-combo');
+rootElement.innerHTML = templates.root();
+// start query if specified in URL parameters
+workflow.autoQuery();
+});
+See template helpers for template customization.

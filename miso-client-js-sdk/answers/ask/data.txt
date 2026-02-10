@@ -1,0 +1,119 @@
+Ask module - data
+Configure API request
+You can configure the base question API payload (request body):
+// for individual workflow
+workflow.useApi(payload);
+// or for all workflows
+const context = client.ui.asks;
+context.useApi(payload);
+For example, to call the API with yearly_decay value 0.9:
+// for individual workflow
+workflow.useApi({ yearly_decay: 0.9 });
+// or for all workflows
+const context = client.ui.asks;
+context.useApi({ yearly_decay: 0.9 });
+Given a question What's the meaing of life?, the API payload will be:
+{
+"question": "What's the meaing of life?",
+"yearly_decay": 0.9
+}
+See the REST API reference for payload options.
+Sources and related resources fields
+You can specify the list of fields of source and related resource records returned in the API responses respectively:
+// for individual workflow
+workflow.useApi({
+source_fl: ['cover_image', 'url', 'created_at', 'updated_at', 'published_at', 'custom_attributes.my_prop'],
+related_resource_fl: ['cover_image', 'url', 'created_at', 'updated_at', 'published_at', 'custom_attributes.my_prop'],
+});
+// or for all workflows
+const context = client.ui.asks;
+context.useApi({
+source_fl: ['cover_image', 'url', 'created_at', 'updated_at', 'published_at', 'custom_attributes.my_prop'],
+related_resource_fl: ['cover_image', 'url', 'created_at', 'updated_at', 'published_at', 'custom_attributes.my_prop'],
+});
+product_id and title are always included in the response.
+The fields override the default settings, rather than adding to the default fields. It's very likely you may want to keep url and cover_image fields in the list if they are used in your templates.
+See source code for the default values of source_fl and related_resource_fl.
+Configure API request globally
+Since 1.8.2
+You can configure the default API payload for all workflows:
+const context = client.ui.asks;
+context.useApi(payload);
+User data
+To pass user data to the API, see API context.
+Modify API response
+You can modify the API response before rendering the UI:
+// for individual workflow
+workflow.useDataProcessor(data => {
+const response = data.value; // the API response
+const { answer, sources, related_resources } = response;
+// ...modify the response
+return data;
+});
+// or for all workflows
+const context = client.ui.asks;
+context.useDataProcessor(data => {
+// ...
+return data;
+});
+Use a custom data source
+You can use a custom data source in place of the built-in Miso API by the following steps:
+Configure the workflow to disable the built-in data source.
+Listen to request event of the workflow to receive data request.
+Call updateData method of the workflow to update the data manually.
+Disable built-in data source
+To disable the built-in data source:
+// to disable for a specific workflow
+workflow.useApi(false);
+// or to disable for all workflows
+const context = client.ui.asks;
+context.useApi(false);
+Listen to request event
+To listen to request event:
+// for individual workflow
+workflow.on('request', ({ session, payload }) => {
+// ...
+});
+// or for all workflows
+const context = client.ui.asks;
+context.on('request', ({ workflow, session, payload }) => {
+// ...
+});
+Update data manually
+To update API results manually:
+const data = { session, value, ongoing };
+workflow.updateData(data);
+The data object has the following properties:
+Name
+Type
+Description
+session
+object
+Required. Session object from `input` event. Updates associated to expired sessions are ignored.
+value
+object
+Required. Result of questions API.
+ongoing
+boolean
+Whether the result is ongoing, expecting more updates to the current session. Default: false.
+Putting it all together
+See the following example:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const client = new MisoClient(`${apiKey}`);
+const context = client.ui.asks;
+// 1. disable the built-in data source
+context.useApi(false);
+// 2. listen to input event
+context.on('request', async ({ workflow, session, payload }) => {
+const questionId = await your.api.getQuestionId(payload); // your API call
+let intervalId;
+intervalId = setInterval(async () => {
+const value = await your.api.getAnswer(questionId); // your API call
+value.finished && clearInterval(intervalId);
+// 3. update data manually. make sure to pass in session
+//    value.finished should reflect whether there will be more data coming
+workflow.updateData({ session, value });
+}, 1000);
+});
+});

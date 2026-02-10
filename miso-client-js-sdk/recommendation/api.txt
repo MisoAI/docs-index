@@ -1,0 +1,17 @@
+Recommendation API
+You can access Miso API with SDK client without using the UI components.
+Table of Content
+Setup
+Setup SDK client for using Miso API.
+Product to products
+Recommend products based on a product and user interests.
+User to products
+Recommend products based on user interests.
+User to attributes
+Recommend product attributes based on user interests.
+User to trending
+Recommend trending products based on user interests.
+Interactions
+Send user interaction events for analytics.
+Context
+Context values that are included by all to API payloads.

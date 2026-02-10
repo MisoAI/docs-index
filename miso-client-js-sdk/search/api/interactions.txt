@@ -1,0 +1,93 @@
+Search API - interactions
+Page views
+When a user visits a product or article page, you can send product_detail_page_view interactions to track the behavior. This information can be used to improve the user experience and provide more relevant recommendations.
+First you could specify the user ID for a registered user, or the anonymous ID for an anonymous user:
+client.context.user_id = 'user_id';
+// or
+client.context.anonymous_id = 'some_anonymous_id';
+If you omit both user_id and anonymous_id, the SDK will generate an anonymous ID remembers it automatically.
+Then you can send the product_detail_page_view interaction:
+client.api.interactions.upload({
+type: 'product_detail_page_view',
+product_ids: ['my_article_id', ...], // the IDs of the products or articles in your catalog
+timestamp: '2024-01-01T00:00:00Z', // optional
+});
+If you omit the timestamp, the Miso API will use the current time.
+Historical data
+It is encouraged to send historical data to the Miso API. This will help Miso to understand the user's behavior and preferences better in a short time.
+When sending historical data, make sure to include timestamp in the interaction payload.
+Performance events
+To generate performance measurement data for analytics, you can send the following events to Miso API:
+Impression
+Viewable impression
+Click
+See Performance measurement for detailed definitions.
+Syntax
+To send an event using SDK that works with analytics, specifying api_group, api_name, and property in custom_context is required.
+client.api.interactions.upload({
+type: 'impression', // or 'viewable_impression', 'click'
+product_ids: [...], // if subjects are catalog items
+context: {
+custom_context: {
+api_group: 'search',
+api_name: 'search',
+property: '...',
+items: [...], // if subjects are not catalog items
+},
+},
+});
+Parameter
+Type
+Description
+type
+string
+Event type: impression, viewable_impression, or click.
+product_ids
+array of strings
+Product ids of the event subjects
+items
+array of strings
+Event subjects (when they are not catalog items)
+api_group
+string
+The first segment of API path, in snake case
+api_name
+string
+The second segment of API path, in snake case
+property
+string
+The property name of the event subjects, which corresponds to the API response
+API and key properties
+API
+Property
+Is catalog item?
+search
+products
+✓
+Examples
+For example, suppose we call the API with the following response:
+const response = await client.api.search.search(payload);
+// response
+{
+products: [
+{ product_id: 'product_1', ... },
+{ product_id: 'product_2', ... },
+{ product_id: 'product_3', ... }
+],
+...
+}
+And we want to track click events on the first two items from the products property, then we send the following interaction:
+client.api.interactions.upload({
+type: 'click',
+product_ids: ['product_1', 'product_2'],
+context: {
+custom_context: {
+api_group: 'search',
+api_name: 'search',
+property: 'products',
+},
+},
+});
+References
+See Rest API for more details.
+For passing user data, see Context.

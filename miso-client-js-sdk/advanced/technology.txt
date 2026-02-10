@@ -1,0 +1,12 @@
+Technology stack
+Layer
+What does it do
+SDK (UI)
+The UI components in SDK
+Workflow for ask, explore, search, and recommendationCustom elements to render Miso API responsesTransform markdown to HTML and render it incrementally (typewriter effect)Add meta data to API payload for Miso analyticsMeasure performance events (impression, viewable impression, and click) and send interactions automatically
+SDK (core)
+The MisoClient in SDK
+Programmatic interface for calling Miso APIAsync iterable interface for answer API pollingManage anonymous_id automaticallyCapture page info (URL, title, referrer) and send with interactionsCapture UTM parameters and send with interactionsHelper functions to measure viewable impression
+Miso API
+Miso REST API service
+Data API for sending catalog and interaction dataQuery API for retrieving answers, related questions, recommendation and search results

@@ -1,0 +1,71 @@
+Search
+Perform a personalized, typo-correcting, semantic search.
+Syntax
+const response = await client.api.search.search(payload, options);
+Payload
+The payload parameter is an object with the following properties:
+Name
+Type
+Description
+engine_id
+string
+The engine you want to get results from. If not specified, the default engine will be used.
+q
+string
+Required. The search query the user has entered. Must be non-empty.
+fq
+string
+A query string in Solr syntax which restricts the superset of products to return, without influencing the overall ranking.
+fl
+array of strings
+List of fields to retrieve. The field product_id is always included.
+When not specified, only product_id will be retrieved.
+You can retrieve all fields with ["*"]. Default: ["*"].
+type
+string
+Specify the type of product to return.
+start
+integer
+The offset of records to retrieve.
+Default: 0.
+rows
+integer
+Number of records to retrieve.
+Default: 5.
+Options
+The options parameter is an optional object with the following properties:
+Name
+Type
+Description
+timeout
+integer
+Request timeout in milliseconds.
+bulk
+boolean
+Bulked API requests froms the same event loop is packed into a single HTTP request.
+Default: false.
+See the request options page for more details.
+Return value
+A Promise of response object with the following properties:
+Name
+Type
+Description
+products
+array of objects
+An array of Product records. Use fl parameter to specify what fields are returned.
+start
+integer
+The offset of records to retrieve.
+Default: 0.
+total
+integer
+The total number of matched records.
+Examples
+const payload = {
+q: 'doge',
+fl: ['title', 'sale_price', 'custom_attributes.*']
+};
+const { products } = await client.api.search.search(payload);
+Learn more
+For advanced usage, see REST API.
+For passing user data, see Context.

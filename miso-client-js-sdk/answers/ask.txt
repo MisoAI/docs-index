@@ -1,0 +1,40 @@
+Guide for building your ask module in answers page
+There are two ways to build your ask module:
+Use the built-in UI elements
+Fully customizable: HTML, CSS, texts, logic.
+Follow the guide.
+Build from scratch
+You can also build your UI from scratch, without the assistance of SDK UI elements. You may want to explore the following references:
+The SDK API section
+Technology stack
+Progressive markdown tools
+Legacy combo UI solution
+The SDK used to offer a combo UI solution which aimed for simplicity. It is now deprecated due to lack for extensibility but still maintained.
+Can be done with 2 lines of HTML.
+Limited customization: CSS, texts.
+Follow the guide.
+Table of Content
+Quick start
+Get started to build your own ask UI in a few steps.
+Get your API key.Access the SDK.Build your ask UI.
+Template helpers
+How to customize the content of ask UI module.
+Add custom contents to the application.Change the arrangement of the elements.
+Elements
+How to customize each custom element in ask UI.
+A list of elements that are used in ask UI.
+Data
+How to customize data used in ask UI.
+Configure API requestModify API responseUse your own data source
+Events
+Lifecycle events in ask UI.
+Listen and unlisten to eventsA list of all lifecycle events
+Workflow
+Introduce the workflow objects that manages the life cycle of ask UI.
+Access workflow objectsProperties of workflow objectsMethods of workflow objects
+Affiliation
+How to setup and customize the affiliation element in ask UI.
+Setup affiliationCustomize the appearance
+Advanced usages
+Advanced usages of ask UI.
+Image results

@@ -1,0 +1,26 @@
+Search UI - elements
+You can customize the elements with the following API:
+workflow.useLayouts({
+// ...
+});
+For example, to customize the miso-query element:
+workflow.useLayouts({
+query: { /* ... */ }
+});
+The following elements are used in the search workflow. See their references for customization options:
+Tag
+Type
+Property in API response
+Reference
+<miso-search>
+container
+--
+miso-search
+<miso-query>
+component
+--
+miso-query
+<miso-products>
+component
+products
+collections

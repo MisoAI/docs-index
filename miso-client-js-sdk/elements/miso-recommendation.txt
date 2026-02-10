@@ -1,0 +1,36 @@
+Elements - <miso-recommendation>
+A container element for the recommendation workflow.
+Other elements have to be placed inside these elements to be associated with the workflow.
+There can be multiple container elements that associate to the same workflow in a page.
+<miso-recommendation>
+<miso-products></miso-products>
+</miso-recommendation>
+Components
+The following table lists the components that are available in the container. Each component either associates to a property in the API response or some input element.
+Tag
+Property in API response
+Description
+<miso-products>
+products
+Attributes
+unit-id
+Specify unit ID for multiple recommendation units.
+<miso-recommendation unit-id="after-article-1">
+<!-- ... -->
+</miso-recommendation>
+logo
+Control Miso logo display.
+By default, Miso logo is appended at the end of the container that contains the main data component (<miso-products>) when data is ready. You can control the logo display by setting the logo attribute on the container element.
+<miso-recommendation logo="false">
+<!-- ... -->
+</miso-recommendation>
+Value
+Default
+Behavior
+true
+Miso logo is appended at the end of container when data is ready.
+false
+Miso logo is not displayed.
+auto
+✓
+Miso logo is appended at the end of container when data is ready only if it contains the main component. (e.g. <miso-products>)

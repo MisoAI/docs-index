@@ -1,0 +1,93 @@
+Ask API - interactions (ask)
+Performance events
+To generate performance measurement data for analytics, you can send the following events to Miso API:
+Impression
+Viewable impression
+Click
+See Performance measurement for detailed definitions.
+Syntax
+To send an event using SDK that works with analytics, specifying api_group, api_name, and property in custom_context is required.
+client.api.interactions.upload({
+type: 'impression', // or 'viewable_impression', 'click'
+product_ids: [...], // if subjects are catalog items
+context: {
+custom_context: {
+api_group: 'ask',
+api_name: 'questions',
+question_id: '...',
+root_question_id: '...',
+property: '...',
+items: [...], // if subjects are not catalog items
+},
+},
+});
+Parameter
+Type
+Description
+type
+string
+Event type: impression, viewable_impression, or click.
+product_ids
+array of strings
+Product ids of the event subjects
+items
+array of strings
+Event subjects (when they are not catalog items)
+api_group
+string
+The first segment of API path, in snake case
+api_name
+string
+The second segment of API path, in snake case
+question_id
+string
+The question id in ask API response
+root_question_id
+string
+The question id of the first question in question sequence. It is different from question_id only when the question is a follow-up one.
+property
+string
+The property name of the event subjects, which corresponds to the API response
+API and key properties
+API
+Property
+Is catalog item?
+questions
+sources
+✓
+related_resources
+✓
+Examples
+For example, suppose we call the API with the following response:
+const answer = await client.api.ask.questions(payload);
+for await (const response of answer) {
+// ...
+}
+// response
+{
+question_id: '11111111-2222-4444-8888-000000000000',
+sources: [
+{ product_id: 'article_1', ... },
+{ product_id: 'article_2', ... },
+{ product_id: 'article_3', ... }
+],
+...
+}
+And we want to track click events on the first two items from the sources property, then we send the following interaction:
+client.api.interactions.upload({
+type: 'click',
+product_ids: ['article_1', 'article_2'],
+context: {
+custom_context: {
+api_group: 'ask',
+api_name: 'questions',
+root_question_id: '...',
+question_id: '11111111-2222-4444-8888-000000000000',
+property: 'sources',
+},
+},
+});
+You can also learn from live example.
+References
+See Rest API for more details.
+For passing user data, see Context.

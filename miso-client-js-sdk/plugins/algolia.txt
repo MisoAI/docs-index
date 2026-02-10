@@ -1,0 +1,16 @@
+Algolia plugin
+Combine the excellence of Miso's accurate search and Algolia's flexible UI frameworks.
+With Miso's Algolia plugin, you can easily work with:
+InstantSearch.js
+Autocomplete
+Table of Content
+Installation
+How to setup the plugin.
+InstantSearch.js
+Working with InstantSearch.js.
+Autocomplete
+Working with Autocomplete.
+Compatibility
+Feature mappings and limitations.
+Customization
+What you can customize with this plugin.

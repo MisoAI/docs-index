@@ -1,0 +1,14 @@
+Hybrid search module
+Table of Content
+Quick start
+Get started to build your own hybrid search module in a few steps.
+Get your API key.Access the SDK.Build your hybrid search UI module.
+Template helpers
+How to customize the content of hybrid search UI module.
+Add custom contents to the application.Change the arrangement of the elements.
+Elements
+How to customize each custom element in hybrid search UI.
+A list of elements that are used in hybrid search UI.
+Workflow
+Introduce the workflow objects that manages the life cycle of hybrid search UI.
+Access workflow objectsProperties of workflow objectsMethods of workflow objects

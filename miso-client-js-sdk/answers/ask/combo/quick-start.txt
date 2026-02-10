@@ -1,0 +1,26 @@
+Ask module (combo) - quick start
+Deprecated in 1.10.0
+Build your ask module in simple steps:
+Obtain your API key from Miso dashboard
+Add Miso SDK to your webpage
+Place an element in your webpage
+Live demo
+1. Obtain your API key
+Log in Miso dashboard.
+Select your enrivonment (e.g. Production).
+You can find your publishable API key in the Overview section.
+2. Add Miso SDK to your webpage
+Add the SDK JavaScript to your webpage:
+<head>
+<script async src="https://cdn.jsdelivr.net/npm/@miso.ai/client-sdk@latest/dist/umd/miso.min.js?api_key={{api_key}}"></script>
+</head>
+You can put the script tag anywhere in the document.
+Make sure to use the publishable API key, rather than the secret one.
+3. Place an element in your webpage
+In your webpage, add the following elements where you want to display the ask module:
+<body>
+<miso-ask-combo></miso-ask-combo>
+</body>
+Customization
+Configuration
+CSS Styles

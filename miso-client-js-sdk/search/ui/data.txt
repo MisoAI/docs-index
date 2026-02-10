@@ -1,0 +1,15 @@
+Search UI - data
+Configure API request
+You can configure the base API payload (request body) for the search workflow:
+const workflow = client.ui.search;
+workflow.useApi(payload);
+For example, to make the API return 8 products instead of the default value:
+workflow.useApi({ rows: 8 });
+When user submit a keyword shiba, the API payload will be:
+{
+"q": "shiba",
+"rows": 8
+}
+See the API reference for more payload options.
+User data
+To pass user data to the API, see API context.

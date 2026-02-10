@@ -1,0 +1,15 @@
+Ask API
+You can access Miso API with SDK client without using the UI components.
+Table of Content
+Setup
+Setup SDK client for using Miso API.
+Questions
+Answer user's question.
+Related questions
+Generate related questions against an article.
+Interactions (ask)
+Send user interaction events for analytics regarding ask module.
+Interactions (explore)
+Send user interaction events for analytics regarding explore module.
+Context
+Context values that are included by all to API payloads.

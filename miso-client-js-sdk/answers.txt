@@ -1,0 +1,23 @@
+Guides for building your Answers UI
+You can integrate Miso Answers into your website in two steps:
+Create an answers page to host the ask module, which responds to user questions.
+In your article pages, add an explore module to display related questions against the articles that lead to the answers page.
+Build your ask module
+There are two ways to build your ask module:
+Use the built-in UI elements
+Fully customizable: HTML, CSS, texts, logic.
+Follow the guide.
+Build from scratch
+You can also build your UI from scratch, without the assistance of SDK UI elements. You may want to explore the following references:
+The SDK API section
+Technology stack
+Progressive markdown tools
+Legacy combo UI solution
+The SDK used to offer a combo UI solution which aimed for simplicity. It is now deprecated due to lack for extensibility but still maintained.
+Can be done with 2 lines of HTML.
+Limited customization: CSS, texts.
+Follow the guide.
+Build your explore module
+Follow the guide.
+Advanced topics
+Technology stack

@@ -1,0 +1,65 @@
+Progressive markdown rendering mechanism
+In this page, we are going to explain how the SDK handles progressive markdown rendering in ask workflow.
+Architecture
+API Response
+markdown
+Parser
+HTML AST
+Query
+cursors(from, to)
+operations
+Animation Frame
+Pacer
+cursor
+Renderer
+DOM operation
+DOM
+Components and data objects
+API Response
+The response from Miso ask API.
+Parser
+Converts markdown to HTML AST.
+Uses remark and rehype under the hood.
+See source code.
+HTML AST
+A rehype AST (abstract syntax tree) of HTML produced by the parser.
+Query
+Keeps track of the latest HTML AST.
+Given the previous cursor and a new cursor, computes the operations to update the DOM tree from previous state to a new state.
+See source code.
+Cursor
+An index number to indicate a position in the HTML AST.
+Each character in a text node has size 1.
+Each element node without children has size 1.
+Animation frame
+The event loop acquired by calling window.requestAnimationFrame().
+Pacer
+A module to compute cursor based on the time elapsed.
+See source code.
+Operation
+A set of operations to update the DOM tree, including append, set, ascend, descend.
+See source code.
+Renderer
+Applies the operations to the DOM tree and keeps tracks of the element at the current cursor position.
+Offers additional hooks to customize the rendering process.
+Typewriter element
+The controller of SDK UI typewriter element, which glues all the other parts.
+See source code.
+Data flow
+Update markdown from API response (the green path)
+The SDK UI workflow periodically receives the API response.
+The parser converts the markdown to HTML AST.
+The query keeps track of the latest HTML AST.
+Update DOM progressively (the blue path)
+An event loop is acquired by calling window.requestAnimationFrame().
+The pacer computes the cursor based on current timestamp.
+The query computes the operations to update the DOM tree from the previous state to the new state, given the previous cursor and the new cursor.
+The renderer applies the operations to the DOM tree.
+Details
+There are some details additional to the main architecture that you may want to know:
+Sometimes the HTML AST results a conflict with the previous tree as the markdown content is gradually revealed. (i.e. if markdown A is a prefix of markdown B, the HTML AST of A may NOT be a subtree of tree B.). In such case we simply overwrites the entire DOM tree.
+The API response tells you whether the markdown content is finished or not. The flag is passed to Query for a reason to minimize tree conflicts. It is also passed to Pacer for a speed-up effect.
+There are different answer_stage in the API response for showing placeholding text like Checking question and fetching relevant contents.... When the answer_stage is changed, the cursor is reset to 0.
+If user starts another question, the current context is reset and the DOM tree is cleared.
+The SDK acquires animation frames aggresively to keep the rendering smooth.
+You can find all the details in the source code mentioned above.

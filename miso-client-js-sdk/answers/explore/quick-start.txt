@@ -1,0 +1,51 @@
+Explore module - quick start
+Build your explore module in simple steps:
+Obtain your API key from Miso dashboard
+Add Miso SDK to your webpage
+Place Miso elements in your webpage
+Configure the explore workflow
+1. Obtain your API key
+Log in Miso dashboard.
+Select your enrivonment (e.g. Production).
+You can find your publishable API key in the Overview section.
+2. Add Miso SDK to your webpage
+As a node module
+In your project directory, run:
+npm install --save @miso.ai/client-sdk
+Then you can import MisoClient from the SDK:
+import MisoClient from '@miso.ai/client-sdk';
+// work with MisoClient
+Using a script tag
+Add the SDK script tag to your webpage:
+<head>  <script async src="https://cdn.jsdelivr.net/npm/@miso.ai/client-sdk@latest/dist/umd/miso.min.js"></script></head>
+You can put the script tag anywhere in the document.
+MisoClient is available on window object. However, it won't be available until the SDK is loaded. The SDK provides a way to access it regardless of the loading status:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const MisoClient = window.MisoClient;
+// work with MisoClient
+});
+3. Place Miso elements in your webpage
+In an article page of your webpage, add the following elements where you want to display the related questions:
+<miso-explore>
+<miso-related-questions></miso-related-questions>
+<!-- <miso-query> support is available since 1.9.1 -->
+<miso-query></miso-query>
+</miso-explore>
+4. Configure the explore workflow
+There are two pieces of information that the explore workflow needs to know:
+product_id of the article, so that it can tell Miso API which article to generate questions against.
+How to get to the answers page given a question, so that it can generate links for the question items.
+// 1. create a Miso client instance and access the explore workflow
+const client = new MisoClient(`${apiKey}`);
+const workflow = client.ui.explore;
+// 2. tell the workflow which article you want to generate questions against
+//    the product_id must match the ones in your catalog
+workflow.useApi({
+product_id: 'product_id_of_the_article',
+});
+// 3. tell the workflow how to get to the answers page given a question
+//    the path must match the path of the answers page in your website
+workflow.useLink(question => `/answers?q=${encodeURIComponent(question)}`);
+// 4. kick off the workflow
+workflow.start();

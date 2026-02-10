@@ -1,0 +1,11 @@
+Ask module (combo)
+Deprecated in 1.10.0
+The combo UI solution is the easiest way to build your ask module. Follow with the quick start guide.
+Demo
+Table of Content
+Quick start
+Ask UI - quick start
+Configuration
+Ask UI - configuration
+CSS styles
+Ask UI - customize CSS styles

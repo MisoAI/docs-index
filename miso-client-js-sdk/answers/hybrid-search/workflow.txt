@@ -1,0 +1,15 @@
+Hybrid search module - workflow
+Workflows are JavaScript objects that control the process of the entire data flow from SDK API request to UI display.
+Access workflow
+You can access the workflow as the following:
+const workflow = client.ui.hybridSearch;
+Properties
+const questionId = workflow.questionId;
+Methods
+Takes the search term from URL parameter q and starts the query:
+workflow.autoQuery();
+Since 1.11.4
+You can use a parameter other than q:
+workflow.autoQuery({
+param: 's',
+});

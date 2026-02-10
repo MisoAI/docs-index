@@ -1,0 +1,37 @@
+Ask module - workflow
+Workflows are JavaScript objects that control the process of the entire data flow from SDK API request to UI display.
+Access workflow
+You can access the (root) workflow as the following:
+const workflow = client.ui.ask;
+When there are multiple workflows, you can retrieve all of them or by question ID or by parent question ID:
+const context = client.ui.asks;
+const workflows = context.workflows; // returns an array of workflows
+const workflow0 = context.getByQuestionId('...');
+const workflow1 = context.getByParentQuestionId('...');
+You can also navigate through the question chain:
+const nextWorkflow0 = workflow.next; // undefined if there is no follow-up question
+const nextWorkflow1 = workflow.getOrCreateNext(); // create a new workflow if absent
+const previousWorkflow = workflow.previous; // undefined for the root workflow
+Listen to workflow creation:
+const context = client.ui.asks;
+context.on('create', (workflow) => {
+// When a new workflow is created
+});
+Properties
+const questionId = workflow.questionId;
+const parentQuestionId = workflow.parentQuestionId;
+Methods
+Takes the question from URL parameter q and starts the query:
+workflow.autoQuery();
+Since 1.11.4
+You can use a parameter other than q:
+workflow.autoQuery({
+param: 's',
+});
+Reset
+Since 1.12.3
+In SPA scenario, you can reset all the workflows by calling restart() on the root workflow:
+client.ui.ask.restart();
+Note that all event listeners and configurations on the context will still be available after the reset, so you don't need to reinitialize the context.
+If your SDK version is older than 1.12.3, try the following:
+client.ui.asks.reset({ events: false });

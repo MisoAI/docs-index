@@ -1,0 +1,8 @@
+Google Tag Manager plugin
+Tools to help you capture event from GTM's (Google Tag Manager) dataLayer object.
+Currently it focuses on GTM's Enhanced Ecommerce extension.
+Table of Content
+Installation
+How to setup the plugin.
+Enhanced Ecommerce
+Working with Enhanced Ecommerce events.

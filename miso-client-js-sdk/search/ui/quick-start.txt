@@ -1,0 +1,41 @@
+Search UI - quick start
+Build your search UI in simple steps:
+Obtain your API key from Miso dashboard
+Add Miso SDK to your webpage
+Place Miso elements in your webpage
+Create a Miso client instance
+1. Obtain your API key
+Log in Miso dashboard.
+Select your enrivonment (e.g. Production).
+You can find your publishable API key in the Overview section.
+2. Add Miso SDK to your webpage
+As a node module
+In your project directory, run:
+npm install --save @miso.ai/client-sdk
+Then you can import MisoClient from the SDK:
+import MisoClient from '@miso.ai/client-sdk';
+// work with MisoClient
+Using a script tag
+Add the SDK script tag to your webpage:
+<head>  <script async src="https://cdn.jsdelivr.net/npm/@miso.ai/client-sdk@latest/dist/umd/miso.min.js"></script></head>
+You can put the script tag anywhere in the document.
+MisoClient is available on window object. However, it won't be available until the SDK is loaded. The SDK provides a way to access it regardless of the loading status:
+const misocmd = window.misocmd || (window.misocmd = []);
+misocmd.push(() => {
+const MisoClient = window.MisoClient;
+// work with MisoClient
+});
+3. Place Miso elements in your webpage
+In an article page of your webpage, add the following elements for search box:
+<miso-search>
+<!-- search box -->
+<miso-query></miso-query>
+</miso-search>
+Add the following elements for search results:
+<miso-search>
+<!-- results -->
+<miso-products></miso-products>
+</miso-search>
+4. Create a Miso client instance
+// 1. create a Miso client instance
+const client = new MisoClient(`${apiKey}`);

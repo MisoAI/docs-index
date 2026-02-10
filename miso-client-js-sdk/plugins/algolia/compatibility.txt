@@ -1,0 +1,67 @@
+Compatibility
+The page elaborates the compatibility between Algolia's API and Miso's implementation.
+Index Name
+In InstantSearch.js and Autocomplete, you have to pass a mandatory parameter for index name to their init functions. We use this parameter to correspond to Miso's engine ID:
+const client = new MisoClient('...');
+const engineId = '...'; // empty string for default Miso engine
+const search = instantsearch({
+//searchClient: searchClient,
+searchClient: client.algolia.searchClient(),
+indexName: engineId
+});
+Search parameters
+Algolia
+Miso
+Notes
+query
+q
+attributesToRetrieve
+fl
+Miso does NOT support exclusion pattern like ['*', '-attr_x'].
+attributesToHighlight
+completion_fields
+Only applies to autocomplete
+Pagination
+Both kinds of Algolia's pagination paradigm are supported.
+Algolia
+Miso
+Notes
+page
+hitsPerPage
+rows
+start
+Miso has 5 rows per page by default.
+length
+rows
+offset
+start
+For example, the following parameters:
+searchClient.search([{ hitsPerPage: 10, page: 5 /* ... */ }]);
+are mapped to Miso's parameters like this:
+client.api.search.search({ rows: 10, start: 10 * 5 /* ... */ });
+Filters
+Algolia's filter expressions are translated to Miso's syntax.
+Algolia
+Miso
+Notes
+facetFilters
+tagFilters
+numericFilters
+fq
+filters
+fq
+Facets
+Algolia
+Miso
+Notes
+facets
+maxValuesPerFacet
+facets
+Highlighting
+Algolia
+Miso
+Notes
+highlightPreTag
+highlightPostTag
+N/A
+They don't correspond to Miso's API parameters but they are supported by SDK.

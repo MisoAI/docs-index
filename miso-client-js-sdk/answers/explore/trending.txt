@@ -1,0 +1,10 @@
+Explore module - trending questions
+Retrieve trending questions
+Since 1.11.6
+You can retrieve trending questions using the useApi method.
+workflow.useApi('trending_questions');
+Note that your don't need to specify product_id in the API payload for trending questions.
+To specify extra API parameters, you can pass an object as the second argument to the useApi method.
+workflow.useApi('trending_questions', {
+/* ... */
+});

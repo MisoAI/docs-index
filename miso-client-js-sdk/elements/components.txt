@@ -1,0 +1,10 @@
+Component elements
+Table of Content
+<miso-query>
+Search box element
+<miso-answer>
+Answer text element
+<miso-affiliation>
+Affiliated products element
+Collections
+Collection elements

@@ -1,0 +1,13 @@
+Container elements
+Container elements are used to serve as root elements that associates with workflows.
+Other elements have to be placed inside these elements to be associated with the workflow.
+There can be multiple container elements that associate to the same workflow in a page.
+Table of Content
+<miso-ask>
+Container element for ask workflow
+<miso-explore>
+Container element for explore workflow
+<miso-search>
+Container element for search workflow
+<miso-recommendation>
+Container element for recommendation workflow

@@ -1,0 +1,47 @@
+Ask module - elements
+You can customize the elements with the following API:
+workflow.useLayouts({
+// ...
+});
+For example, to customize the miso-query element:
+workflow.useLayouts({
+query: { /* ... */ }
+});
+The following elements are used in the ask workflow. See their references for customization options:
+Tag
+Type
+Property in API response
+Reference
+<miso-ask>
+container
+--
+miso-ask
+<miso-query>
+component
+--
+miso-query
+<miso-feedback>
+component
+--
+<miso-question>
+component
+question
+<miso-answer>
+component
+answer
+miso-answer
+<miso-affiliation>
+component
+*
+miso-affiliation
+<miso-sources>
+component
+sources
+collections
+<miso-related-resources>
+component
+related_resources
+collections
+<miso-query-suggestions>
+component
+followup_questions

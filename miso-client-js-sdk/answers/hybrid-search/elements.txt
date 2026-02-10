@@ -1,0 +1,40 @@
+Hybrid search module - elements
+You can customize the elements with the following API:
+workflow.useLayouts({
+// ...
+});
+For example, to customize the miso-query element:
+workflow.useLayouts({
+query: { /* ... */ }
+});
+The following elements are used in the hybrid-search workflow. See their references for customization options:
+Tag
+Type
+Property in API response
+Reference
+<miso-hybrid-search>
+container
+--
+miso-hybrid-search
+<miso-query>
+component
+--
+miso-query
+<miso-products>
+component
+products
+collections
+<miso-feedback>
+component
+--
+<miso-question>
+component
+question
+<miso-answer>
+component
+answer
+miso-answer
+<miso-sources>
+component
+sources
+collections

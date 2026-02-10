@@ -1,0 +1,45 @@
+Elements - <miso-query>
+<miso-query> is the element for search or question input.
+Tag
+Used in
+<miso-query>
+Ask  |  Explore  |  Hybrid search  |  Search
+Layouts
+The only and default layout for this category is search-box.
+Placeholder text
+You can specify the placeholder text of the search box input element by:
+workflow.useLayouts({
+query: {
+placeholder: 'Ask anything!'
+}
+});
+Button text
+The default text of the submit button is Search for search workflow and Ask for ask workflow. You can change it by:
+workflow.useLayouts({
+query: {
+buttonText: 'Go!'
+}
+});
+Customize styles
+You can customize the look-and-feel of any layouts by adding additional CSS rules. The built-in layouts have the following base class names:
+Layout
+CSS class name
+SearchBox
+miso-search-box
+If you want to change the base class name of the elements, specify it in the options:
+workflow.useLayouts({
+query: {
+className: 'my-miso-search-box'
+}
+});
+Customize DOM structure
+Simply leave elements inside <miso-query> element:
+<miso-query>
+<div>
+<input type="text" data-role="input">
+<button type="submit">
+</div>
+</miso-query>
+The layout handles DOM events by the following rules:
+The first <input> or <textarea> element with attribute data-role="input" holds the query text.
+When clicking on an element with attribute type="submit" or data-role="button", it submits the query.

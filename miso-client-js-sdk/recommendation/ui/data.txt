@@ -1,0 +1,24 @@
+Recommendation UI - data
+Configure API request
+You can configure the API and its payload (request body):
+const workflow = client.ui.recommendation;
+workflow.useApi(apiName, payload);
+For example, to make the API return 8 products instead of the default value:
+workflow.useApi('user_to_products', { rows: 8 });
+Available apiName values are:
+Value
+API
+"user_to_products"
+User to Products
+"product_to_products"
+Product to Products
+false
+Disable built-in data source.
+See the API reference pages for more payload options.
+Configure API request globally
+Since 1.8.2
+You can configure the API payload for all workflows:
+const context = client.ui.recommendations;
+context.useApi(apiName, payload);
+User data
+To pass user data to the API, see API context.

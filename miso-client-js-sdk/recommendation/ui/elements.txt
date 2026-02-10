@@ -1,0 +1,22 @@
+Recommendation UI - elements
+You can customize the elements with the following API:
+workflow.useLayouts({
+// ...
+});
+For example, to customize the miso-query element:
+workflow.useLayouts({
+query: { /* ... */ }
+});
+The following elements are used in the recommendation workflow. See their references for customization options:
+Tag
+Type
+Property in API response
+Reference
+<miso-recommendation>
+container
+--
+miso-recommendation
+<miso-products>
+component
+products
+collections

@@ -1,0 +1,70 @@
+Ask module - events
+The SDK emit events at different stages of the workflow lifecycle.
+Events
+Name
+Properties
+Triggered when
+request
+session, payload
+When SDK sends a request to Miso API.
+loading
+session, status, ongoing
+When SDK has sent a request to Miso API and is waiting for the response.
+ready
+session, status, ongoing
+When SDK starts to display the anwser.
+done
+session, status, ongoing
+When the answer is fully populated.
+interrupt
+session, status, ongoing
+When the current session is interrupted by a new session (usually by a new question submit).
+error
+session, status, ongoing
+When the session is interrupted by an error.
+finally
+session, status, ongoing
+When the session is finished, either due to completion, interruption or error.
+The session will always result in either a done, interrupt, or error event.
+Following the three types of event, the session then always ends with a finally event.
+Listen to events
+You can listen to several events on the ask workflow.
+Listen to events on all workflows
+Since 1.8.2
+const context = client.ui.asks;
+context.on('request', ({ workflow, session, payload }) => {
+// When user submits a question in search box.
+});
+context.on('done', ({ workflow, session, status, ongoing }) => {
+// When answer is fully populated
+});
+To remove an event listener, call the function returned by on:
+const off = context.on('done', ({ workflow, session, status, ongoing }) => {
+// ...
+});
+off(); // remove the listener
+Listen to events on an individual workflow
+workflow.on('request', ({ session, payload }) => {
+// When user submits a question in search box.
+});
+workflow.on('done', ({ session, status, ongoing }) => {
+// When answer is fully populated
+});
+To remove an event listener, call the function returned by on:
+const off = workflow.on('done', ({ session, status, ongoing }) => {
+// ...
+});
+off(); // remove the listener
+See workflow for individual workflow access.
+Feedback Events
+You can listen to feedback events when users click on the "Helpful" or "Not helpful buttons:
+const context = client.ui.asks;
+context.on('feedback', (event) => {
+const questionId = event.workflow.questionId;
+const questionText = event.workflow._hub.states.query?.q;
+if (event.value === 'helpful') {
+// Handle helpful feedback
+} else if (event.value === 'unhelpful') {
+// Handle unhelpful feedback
+}
+});
