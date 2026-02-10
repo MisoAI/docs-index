@@ -1,0 +1,10 @@
+Recommendation APIs
+Table of Content
+User to Products
+Personalized product recommendation.
+User to Attributes
+Discover key attribute values your users most interested in.
+User to Trending
+Personalized trending product recommendation.
+Product to Products
+Personalized product recommendation against a specific product.

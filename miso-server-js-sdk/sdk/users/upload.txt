@@ -1,0 +1,77 @@
+Upload users
+Upload user data to Miso dataset.
+Syntax
+await client.api.users.upload(users, options);
+Parameters
+The users parameter can be:
+An object, representing a single user
+An array of objects, representing multiple users
+A JSON string of array of objects
+A single record of user can have the following properties:
+Name
+Type
+Description
+user_id
+string
+Required. The unique identifier of a user.
+created_at
+string
+The created time of the item, in ISO-8601 date or datetime format.
+updated_at
+string
+The last updated time of the item, in ISO-8601 date or datetime format.
+name
+string
+The user's full name.
+profile_image
+URL string
+A URL of the profile image of the user.
+age
+number
+Age of the user. Miso internally converts it to year of birth.
+gender
+string
+The user's gender.
+city
+string
+City or zipcode the user is based in.
+state
+string
+State the user is based in.
+country
+string
+Country the user is based in.
+group_id
+string
+Group or Account ID from your CRM. This is useful in B2B scenarios.
+description
+string
+Text description of the user. This can be the user's own bio or the internal notes about the user. If available, Miso will analyze this description to better profile a user.
+custom_attributes
+object
+An free-schema object to keep additional information. Note that the data schema must be consistent across all records.
+Options
+The options parameter is an optional object with the following properties:
+Name
+Type
+Description
+async
+boolean
+Turn on asynchronous mode in upload APIs.
+Default: false.
+dryRun
+boolean
+Make a dry run with upload APIs.
+Default: false.
+See the request options page for more details.
+Return value
+A Promise without value.
+Examples
+const user = {
+user_id: 'u01',
+custom_attributes: {
+}
+};
+await client.api.users.upload([user]);
+Learn more
+For more information, see REST API.

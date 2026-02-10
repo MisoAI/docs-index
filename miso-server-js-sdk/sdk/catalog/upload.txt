@@ -1,0 +1,134 @@
+Upload catalog
+Upload catalog data to Miso dataset.
+Syntax
+await client.api.products.upload(products, options);
+Parameters
+The products parameter can be:
+An object, representing a single catalog item
+An array of objects, representing multiple items
+A JSON string of array of objects
+A single record of catalog item can have the following properties:
+Name
+Type
+Description
+product_id
+string
+Required. The unique identifier of a catalog item.
+created_at
+string
+The created time of the item, in ISO-8601 date or datetime format.
+updated_at
+string
+The last updated time of the item, in ISO-8601 date or datetime format.
+published_at
+string
+The last published time of the item, in ISO-8601 date or datetime format.
+type
+string
+The type of catalog item. For instance, a travel agency may have hotels and flights in its catalog.
+product_group_id
+string
+When each of your products has multiple variants (color, size, etc.), assign a product_group_id to the product and assign a unique product_id to each variant.
+parent_id
+string
+A non-empty string referring to the product_id of another catalog item. The parent item does not need to exist when you upload this item.
+related_ids
+array of strings
+A list of product_id or product_group_id of other items related to this one.
+title
+string
+The title of the item. This property weights more than the others in a search query.
+description
+string
+The description of the item. Miso makes semantic understanding from this property and extract rich information to search against.
+html
+string
+The HTML content of the item. Miso will search against this property and apply semantic understanding in a way similar to the description property, but with HTML tags removed.
+language
+string
+The language in which the item's description was written, in the two-letter ISO_639-1 code.
+categories
+array of array of strings
+A double array of strings representing multiple structured categories of an item. For example, the categories of a collectible stuffed toy can be [['Toy', 'Stuffed Animals'], ['Art', 'Collectibles']].
+tags
+array of strings
+A list of tags on the item.
+url
+URL string
+A URL to the item (product) page.
+cover_image
+URL string
+A URL of the cover image of the item.
+original_price
+number
+The original price of the product item.
+sale_price
+number
+The sales price of the product item.
+margin
+number
+The margin of the product item.
+availability
+string (enum)
+The availability of the product, useful in search/recommendation filters. Valid values are: IN_STOCK, OUT_OF_STOCK, PRE_ORDER. Default: IN_STOCK.
+size
+string
+The size of the product item.
+color
+string
+The color of the product item.
+material
+string
+The material of the product item.
+condition
+string (enum)
+The condition of the product item. Valid values are: NEW, USED, REFURBISHED. Default: NEW.
+brand
+string
+The brand of the product item.
+authors
+array of strings
+The author(s) of the product/content.
+publishers
+array of strings
+The publisher(s) of the product/content.
+collections
+array of strings
+The collection(s) the product/content belongs to.
+location
+object
+An object with lat and lon values. Miso support geolocation filtering and sorting when creating search and recommendation results if location information is given.
+custom_attributes
+object
+An free-schema object to keep additional information. Note that the data schema must be consistent across all records.
+Options
+The options parameter is an optional object with the following properties:
+Name
+Type
+Description
+async
+boolean
+Turn on asynchronous mode in upload APIs.
+Default: false.
+dryRun
+boolean
+Make a dry run with upload APIs.
+Default: false.
+See the request options page for more details.
+Return value
+A Promise without value.
+Examples
+const product = {
+product_id: 'p01',
+title: 'Chocolate Cookies',
+url: 'https://my.shop.com/products/p01',
+cover_image: 'https://my.shop.com/img/products/p01.jpg',
+sale_price: 3.5,
+custom_attributes: {
+weight: 0.5,
+weight_unit: 'pound'
+}
+};
+await client.api.products.upload([product]);
+Learn more
+For more information, see REST API.

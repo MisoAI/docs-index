@@ -1,0 +1,191 @@
+Upload interactions
+Upload user interaction events to Miso dataset.
+Syntax
+await client.api.interactions.upload(events, options);
+Parameters
+The events parameter can be:
+An object, representing a single user interaction event
+An array of objects, representing multiple events
+A JSON string of array of objects
+A single record of event object can have the following properties depending on the event type:
+#event-types {
+display: flex;
+flex-flow: row wrap;
+}
+@media (min-width: 1200px) {
+#event-props-container {
+display: grid;
+gap: 1rem;
+grid-template-areas: "selection table";
+grid-template-columns: min-content 1fr;
+}
+#event-types-panel {
+grid-area: selection;
+}
+#event-props-table {
+grid-area: table;
+}
+}
+#event-props-table[data-event-type="product_detail_page_view"] tr[data-used-by-except~="product_detail_page_view"],
+#event-props-table[data-event-type="category_page_view"] tr[data-used-by-except~="category_page_view"],
+#event-props-table[data-event-type="search"] tr[data-used-by-except~="search"],
+#event-props-table[data-event-type="impression"] tr[data-used-by-except~="impression"],
+#event-props-table[data-event-type="viewable_impression"] tr[data-used-by-except~="viewable_impression"],
+#event-props-table[data-event-type="click"] tr[data-used-by-except~="click"],
+#event-props-table[data-event-type="home_page_view"] tr[data-used-by-except~="home_page_view"],
+#event-props-table[data-event-type="promo_page_view"] tr[data-used-by-except~="promo_page_view"],
+#event-props-table[data-event-type="product_image_view"] tr[data-used-by-except~="product_image_view"],
+#event-props-table[data-event-type="add_to_cart"] tr[data-used-by-except~="add_to_cart"],
+#event-props-table[data-event-type="checkout"] tr[data-used-by-except~="checkout"],
+#event-props-table[data-event-type="remove_from_cart"] tr[data-used-by-except~="remove_from_cart"],
+#event-props-table[data-event-type="refund"] tr[data-used-by-except~="refund"],
+#event-props-table[data-event-type="subscribe"] tr[data-used-by-except~="subscribe"],
+#event-props-table[data-event-type="read"] tr[data-used-by-except~="read"],
+#event-props-table[data-event-type="watch"] tr[data-used-by-except~="watch"],
+#event-props-table[data-event-type="listen"] tr[data-used-by-except~="listen"],
+#event-props-table[data-event-type="complete"] tr[data-used-by-except~="complete"],
+#event-props-table[data-event-type="add_to_collection"] tr[data-used-by-except~="add_to_collection"],
+#event-props-table[data-event-type="remove_from_collection"] tr[data-used-by-except~="remove_from_collection"],
+#event-props-table[data-event-type="rate"] tr[data-used-by-except~="rate"],
+#event-props-table[data-event-type="like"] tr[data-used-by-except~="like"],
+#event-props-table[data-event-type="dislike"] tr[data-used-by-except~="dislike"],
+#event-props-table[data-event-type="share"] tr[data-used-by-except~="share"],
+#event-props-table[data-event-type="bookmark"] tr[data-used-by-except~="bookmark"],
+#event-props-table[data-event-type="custom"] tr[data-used-by-except~="custom"],
+#event-props-table tr[data-used-by] {
+display: none;
+}
+#event-props-table[data-event-type="product_detail_page_view"] tr[data-used-by~="product_detail_page_view"],
+#event-props-table[data-event-type="category_page_view"] tr[data-used-by~="category_page_view"],
+#event-props-table[data-event-type="search"] tr[data-used-by~="search"],
+#event-props-table[data-event-type="impression"] tr[data-used-by~="impression"],
+#event-props-table[data-event-type="viewable_impression"] tr[data-used-by~="viewable_impression"],
+#event-props-table[data-event-type="click"] tr[data-used-by~="click"],
+#event-props-table[data-event-type="home_page_view"] tr[data-used-by~="home_page_view"],
+#event-props-table[data-event-type="promo_page_view"] tr[data-used-by~="promo_page_view"],
+#event-props-table[data-event-type="product_image_view"] tr[data-used-by~="product_image_view"],
+#event-props-table[data-event-type="add_to_cart"] tr[data-used-by~="add_to_cart"],
+#event-props-table[data-event-type="checkout"] tr[data-used-by~="checkout"],
+#event-props-table[data-event-type="remove_from_cart"] tr[data-used-by~="remove_from_cart"],
+#event-props-table[data-event-type="refund"] tr[data-used-by~="refund"],
+#event-props-table[data-event-type="subscribe"] tr[data-used-by~="subscribe"],
+#event-props-table[data-event-type="read"] tr[data-used-by~="read"],
+#event-props-table[data-event-type="watch"] tr[data-used-by~="watch"],
+#event-props-table[data-event-type="listen"] tr[data-used-by~="listen"],
+#event-props-table[data-event-type="complete"] tr[data-used-by~="complete"],
+#event-props-table[data-event-type="add_to_collection"] tr[data-used-by~="add_to_collection"],
+#event-props-table[data-event-type="remove_from_collection"] tr[data-used-by~="remove_from_collection"],
+#event-props-table[data-event-type="rate"] tr[data-used-by~="rate"],
+#event-props-table[data-event-type="like"] tr[data-used-by~="like"],
+#event-props-table[data-event-type="dislike"] tr[data-used-by~="dislike"],
+#event-props-table[data-event-type="share"] tr[data-used-by~="share"],
+#event-props-table[data-event-type="bookmark"] tr[data-used-by~="bookmark"],
+#event-props-table[data-event-type="custom"] tr[data-used-by~="custom"],
+tr {
+display: table-row;
+}
+Select an event type:
+product_detail_page_view
+category_page_view
+search
+impression
+viewable_impression
+click
+home_page_view
+promo_page_view
+product_image_view
+add_to_cart
+checkout
+remove_from_cart
+refund
+subscribe
+read
+watch
+listen
+complete
+add_to_collection
+remove_from_collection
+rate
+like
+dislike
+share
+bookmark
+custom
+Name
+Type
+Description
+type
+string
+Required. The type of event.
+custom_action_name
+string
+Required. The name of the custom interaction that you have defined.
+user_id
+string
+Identifies the signed-in user who performed the interaction. We will use user_id to link Interaction records to your User records. For visitors who have not signed in, see anonymous_id.
+anonymous_id
+string
+A pseudo-unique substitute for user_id. We use anonymous_id to identify a visitor who has not signed in. When a visitor signs in and the user_id and anonymous_id are both present, the anonymous_id will be linked to the user_id along with the past interactions associated with it.
+category
+array of strings
+A hierarchical list describing the product category. For example, ['home', 'kitchen', 'tools'].
+search
+object
+The search keywords and filters the user uses.
+revenue
+object
+Total revenue associated with the checkout. The revenue should include generally shipping, tax, etc. that you want to include as part of your revenue calculations.
+quantities
+array of positive integers
+The quantities of products the user adds to their cart or checks out with.
+rating
+number
+The rating the user gave in the range of [0, 5]. As a convention in the RecSys community, a rating >= 3.5 is considered positive, a rating <= 2 is negative, and otherwise a rating is neutral. If you use any other rating scale, please normalize it to a [0, 5] scale.
+duration
+number
+How long (in seconds) the user stayed on this page, or consumed (listened, read, or watched) a product.
+product_ids
+array of strings
+Products or content the user is interacting with. Default: []
+product_group_ids
+array of strings
+The product groups the user is interacting with.
+timestamp
+string
+The ISO-8601 timestamp specifying when the interaction occurred. If the interaction just happened, leave it out and we will default to the server's time.
+miso_id
+string
+Miso-generated unique Id for each recommendation or search result.
+context
+object
+An object of extra information that provides useful context about an interaction.
+// TODO: find a better way
+const table = document.querySelector('#event-props-table');
+const radio = document.querySelector('#event-types input[type="radio"]');
+radio.checked = true;
+function onSelectEventType(value) {
+table.setAttribute('data-event-type', value);
+}
+onSelectEventType(radio.value);
+Options
+The options parameter is an optional object with the following properties:
+Name
+Type
+Description
+dryRun
+boolean
+Make a dry run with upload APIs.
+Default: false.
+See the request options page for more details.
+Return value
+A Promise without value.
+Examples
+const event = {
+type: 'add_to_cart',
+product_ids: ['a001', 'a002'],
+quantities: [3, 5],
+user_id: '...'
+};
+await client.api.interactions.upload(event);
+Learn more
+For more information, see REST API.

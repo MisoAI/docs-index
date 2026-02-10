@@ -1,0 +1,20 @@
+Miso server SDK for Node.js
+This library is Miso's server side SDK for Node.js. You can
+Configure and create a client instance.
+Retrieve search and recommendation results with API.
+Track user interactions with API, with automatically managed context information.
+Latest version
+Table of Content
+Overview
+Installation
+Guild to install this SDK in your project.
+Catalog
+Catalog APIs
+Interactions
+Interaction APIs.
+Users
+Users APIs
+Search
+Search and autocomplete APIs.
+Recommendation
+Recommendation APIs.

@@ -1,0 +1,95 @@
+User interaction events
+Events
+Clickstream
+Name
+Definition
+&#9734;
+product_detail_page_view
+A user views a product page.
+&#9734;
+category_page_view
+A user views a category page for a specific "family" or "group" or products or content.
+&#9734;
+search
+A user submits search keywords and/or filter criteria.
+&#9734;
+impression
+A product or content asset (usually from recommendation results) is rendered on the page or loaded into the client device.
+&#9734;
+viewable_impression
+A user saw or was presented with a product or content asset. It is usually triggered when 50% of asset area lies in the viewport for 1 second.
+&#9734;
+click
+A user clicks through a product link.
+&#9734;
+home_page_view
+A user views your home page.
+&#9734;
+promo_page_view
+A user views a specific promotional or curated marketing page about certain products or content.
+&#9734;
+product_image_view
+A user views the image of a product (e.g. to enlarge a product photo).
+Conversion (eCommerce)
+Name
+Definition
+&#9734;
+add_to_cart
+A user adds a product into their shopping cart.
+&#9734;
+checkout
+A user checkouts with a set of products.
+&#9734;
+remove_from_cart
+A user removes a product from their shopping cart.
+&#9734;
+refund
+A user requests a refund of products they bought.
+&#9734;
+subscribe
+A user subscribes a product for its information.
+Consumption (content media)
+Name
+Definition
+&#9734;
+read
+A user reads a piece of written content.
+&#9734;
+watch
+A user watches content that is of a video format.
+&#9734;
+listen
+A user listens to content that is of an audio format.
+&#9734;
+complete
+A user finishes consuming a product (e.g. complete a course or a video).
+&#9734;
+add_to_collection
+A user adds a product to their personal collection.
+&#9734;
+remove_from_collection
+A user removes a product from their personal collection.
+Feedback signals
+Name
+Definition
+&#9734;
+rate
+A user gives a rating to a product or piece of content.
+&#9734;
+like
+A user indicates a like for a product.
+&#9734;
+dislike
+A user indicates a dislike for a product.
+&#9734;
+share
+A user shares a product or piece of content.
+&#9734;
+bookmark
+A user bookmarks a product.
+Custom
+Name
+Definition
+&#9734;
+custom
+You can keep track of any custom event defined by yourself.
