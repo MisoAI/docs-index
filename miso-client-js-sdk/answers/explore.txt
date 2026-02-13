@@ -12,6 +12,9 @@ Access the workflow object.Link function.
 Trending questions
 Retrieve trending questions.
 Retrieve trending questions
+Search box only
+Use the explore module with only a search box.
+Display only the search box without related questions
 Configuration
 Configure the explore module settings and behavior.
 Configure the number of questions to display
