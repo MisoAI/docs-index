@@ -9,6 +9,9 @@ A list of elements that are used in explore UI.
 Workflow
 Introduce the workflow object that manages the life cycle of explore UI.
 Access the workflow object.Link function.
+Multiple units
+Display multiple explore blocks with different unit IDs.
+Create multiple explore workflows with different unit IDs
 Trending questions
 Retrieve trending questions.
 Retrieve trending questions
