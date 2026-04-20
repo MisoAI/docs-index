@@ -18,6 +18,9 @@ Retrieve trending questions
 Search box only
 Use the explore module with only a search box.
 Display only the search box without related questions
+Autocomplete
+Enable autocomplete for explore units.
+Enable autocomplete for all explore units
 Configuration
 Configure the explore module settings and behavior.
 Configure the number of questions to display
