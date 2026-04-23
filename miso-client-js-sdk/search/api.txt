@@ -11,3 +11,5 @@ Interactions
 Send user interaction events for analytics.
 Context
 Context values that are included by all to API payloads.
+Client variants
+Choose between the standard and lite client variants.

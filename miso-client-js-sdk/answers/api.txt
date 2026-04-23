@@ -15,3 +15,5 @@ Interactions (explore)
 Send user interaction events for analytics regarding explore module.
 Context
 Context values that are included by all to API payloads.
+Client variants
+Choose between the standard and lite client variants.
