@@ -1,52 +1,89 @@
 Ask API - interactions (explore)
-Performance events
-To generate performance measurement data for analytics, you can send the following events to Miso API:
-Impression
-Viewable impression
-Click
-See Performance measurement for detailed definitions.
+The UI plugin of SDK sends user interactions to Miso API for analytics automatically. You can send interactions manually if needed.
 Syntax
-To send an event using SDK that works with analytics, specifying api_group, api_name, and property in custom_context is required.
 client.api.interactions.upload({
-type: 'impression', // or 'viewable_impression', 'click'
-product_ids: [...], // if subjects are catalog items
+type: 'impression', // or 'viewable_impression', 'click', 'submit'
+miso_id: '...', // miso_id from API response
 context: {
 custom_context: {
 api_group: 'ask',
-api_name: 'related_questions',
+api_name: 'related_questions', // or 'trending_questions'
 property: '...',
 items: [...], // if subjects are not catalog items
 },
 },
 });
-Parameter
+API names
+related_questions
+trending_questions
+Properties
+The property field in the interaction payload refers to the subject of the interaction. It usually corresponds to a field in the API response with a few exceptions.
+Property
+Associated required field
+Interactions
+related_questions
+context.custom_context.items
+impression, viewable_impression, click
+query
+--
+submit
+container
+--
+impression, viewable_impression
+The property container refers to the entire explore unit section. The purpose of tracking container is to keep track of the data when the API response is empty or in a scenario where the user does not send an API request (e.g. search bar only).
+In the analytics, the CTR of submit is defined as query's submit divided by container's impression. Vice versa for vCTR, it is query's submit divided by container's viewable_impression.
+Interaction types
 Type
+Definition
+impression
+The content of a subject is rendered in DOM tree, regardless of being seen or not.
+viewable_impression
+At least 50% of the content of a subject shows up in viewport for a consecutive 1 second.
+click
+The user clicks on the link of a subject, which may lead to an article/product page or answers page.
+submit
+The user submits a query through the search box.
+See performance measurement for the detailed definitions and metrics of CTR, vCTR, and view rate.
+Interaction payload fields
+Top-level fields:
+Field
+Type
+Required
 Description
 type
 string
-Event type: impression, viewable_impression, or click.
-product_ids
-array of strings
-Product ids of the event subjects
-items
-array of strings
-Event subjects (when they are not catalog items)
+✓
+Interaction type.
+miso_id
+string
+✓
+Miso-generated unique ID in each API response.
+Fields under context.custom_context:
+Field
+Type
+Required
+Description
 api_group
 string
-The first segment of API path, in snake case
+✓
+The first segment of API path, in snake case.
 api_name
 string
-The second segment of API path, in snake case
+✓
+The second segment of API path, in snake case.
 property
 string
-The property name of the event subjects, which corresponds to the API response
-API and key properties
-API
-Property
-Is catalog item?
-related_questions
-related_questions
-✗
+✓
+The subject name of the interaction, which usually correspond to a field in the API response.
+site
+string
+The site name. Only required when you serve multiple sites from a single Miso app.
+unit_id
+string
+The unit id of the workflow unit. Only required when you have multiple units in your site. When omitted, the unit name shows Home for URL path / and otherwise Article in analytics.
+items
+array of strings
+Subject items (when they are non-catalog items, such as related_questions).
 Examples
 For example, suppose we call the API with the following response:
 const response = await client.api.ask.relatedQuestions(payload);
@@ -57,11 +94,12 @@ related_questions: [
 'question_2',
 'question_3'
 ],
-...
+miso_id: '12345678-1234-4444-1234-123456789012'
 }
-And we want to track click events on the first two items from the related_questions property, then we send the following interaction:
+And we want to track click interactions on the first two items from the related_questions property, then we send the following interaction:
 client.api.interactions.upload({
 type: 'click',
+miso_id: '12345678-1234-4444-1234-123456789012',
 context: {
 custom_context: {
 api_group: 'ask',

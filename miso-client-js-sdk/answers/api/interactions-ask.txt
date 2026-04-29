@@ -1,62 +1,87 @@
 Ask API - interactions (ask)
-Performance events
-To generate performance measurement data for analytics, you can send the following events to Miso API:
-Impression
-Viewable impression
-Click
-See Performance measurement for detailed definitions.
+The UI plugin of SDK sends user interactions to Miso API for analytics automatically. You can send interactions manually if needed.
 Syntax
-To send an event using SDK that works with analytics, specifying api_group, api_name, and property in custom_context is required.
 client.api.interactions.upload({
-type: 'impression', // or 'viewable_impression', 'click'
+type: 'impression', // or 'viewable_impression', 'click', 'submit'
 product_ids: [...], // if subjects are catalog items
 context: {
 custom_context: {
 api_group: 'ask',
 api_name: 'questions',
-question_id: '...',
-root_question_id: '...',
 property: '...',
 items: [...], // if subjects are not catalog items
+question_id: '...',
+root_question_id: '...',
 },
 },
 });
-Parameter
+API names
+questions
+Properties
+The property field in the interaction payload refers to the subject of the interaction. It usually corresponds to a field in the API response with a few exceptions.
+Property
+Associated required field
+Interactions
+sources
+product_ids
+impression, viewable_impression, click
+related_resources
+product_ids
+impression, viewable_impression, click
+Interaction types
 Type
+Definition
+impression
+The content of a subject is rendered in DOM tree, regardless of being seen or not.
+viewable_impression
+At least 50% of the content of a subject shows up in viewport for a consecutive 1 second.
+click
+The user clicks on the link of a subject, which may lead to an article/product page or answers page.
+feedback
+The user gives feedback on an answer.
+See performance measurement for the detailed definitions and metrics of CTR, vCTR, and view rate.
+Interaction payload fields
+Top-level fields:
+Field
+Type
+Required
 Description
 type
 string
-Event type: impression, viewable_impression, or click.
+✓
+Interaction type.
 product_ids
 array of strings
-Product ids of the event subjects
-items
-array of strings
-Event subjects (when they are not catalog items)
+product_id values of the subject items (when they are catalog items).
+Fields under context.custom_context:
+Field
+Type
+Required
+Description
 api_group
 string
-The first segment of API path, in snake case
+✓
+The first segment of API path, in snake case.
 api_name
 string
-The second segment of API path, in snake case
-question_id
-string
-The question id in ask API response
-root_question_id
-string
-The question id of the first question in question sequence. It is different from question_id only when the question is a follow-up one.
+✓
+The second segment of API path, in snake case.
 property
 string
-The property name of the event subjects, which corresponds to the API response
-API and key properties
-API
-Property
-Is catalog item?
-questions
-sources
 ✓
-related_resources
-✓
+The subject name of the interaction, which usually correspond to a field in the API response.
+site
+string
+The site name. Only required when you serve multiple sites from a single Miso app.
+items
+array of strings
+Subject items (when they are non-catalog items, such as related_questions).
+question_id
+string
+The question id in ask API response.
+root_question_id
+string
+The question id of the first question in question sequence. It is different from question_id only when the question is a follow-up.
 Examples
 For example, suppose we call the API with the following response:
 const answer = await client.api.ask.questions(payload);
@@ -73,7 +98,7 @@ sources: [
 ],
 ...
 }
-And we want to track click events on the first two items from the sources property, then we send the following interaction:
+And we want to track click interactions on the first two items from the sources property, then we send the following interaction:
 client.api.interactions.upload({
 type: 'click',
 product_ids: ['article_1', 'article_2'],
